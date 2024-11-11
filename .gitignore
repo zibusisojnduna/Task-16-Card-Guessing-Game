@@ -1,0 +1,40 @@
+# Node.js dependencies
+node_modules/
+
+# npm log files
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Operating system files
+.DS_Store          # macOS
+Thumbs.db          # Windows
+
+# Environment files
+.env               # For storing sensitive data (e.g., database keys)
+
+# Logs
+logs/
+*.log
+
+# Build output
+dist/
+build/
+
+# IDE/editor files
+.vscode/           # Visual Studio Code settings
+.idea/             # IntelliJ/WebStorm
+*.sublime-workspace
+*.sublime-project
+
+# Coverage directory from testing
+coverage/
+
+# Package distribution files
+*.tgz
+*.zip
+
+# Temporary files
+*.swp
+*.bak
+*.tmp
