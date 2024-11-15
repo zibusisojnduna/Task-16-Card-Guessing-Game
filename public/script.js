@@ -1,38 +1,52 @@
-let flippedCards = []
-let matchedCards = 0
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.card');
+  let flippedCards = [];
+  let matchedPairs = 0;
+  let isGameOver = false;
 
-function flipCard(index){
-const card = document.getElementById(`card-${index}`)
-card.classList.add("flipped")
+  // Function to handle card clicks
+  function flipCard(card) {
+    if (flippedCards.length < 2 && !card.classList.contains('flipped') && !isGameOver) {
+      card.classList.add('flipped');
+      flippedCards.push(card);
 
-flippedCards.push(card)
-
-if (flippedCards.length === 2) {
-    const card1= flippedCards[0]
-    const card2= flippedCards[1]
-
-    const card1Value = card1.getAttribute("data-card-id")
-    const card2Value = card2.getAttribute("data-card-id")
-
-    if (card1Value === card2Value) {
-        matchedCards++;
-        if (matchedCards === 18) {
-            alert("Well done! You won the game!")
-        }
-        else {
-            setTimeout(() => {
-                card1.classList.remove("flipped")
-                card2.classList.remove("flipped")
-            }, 1000)
-
-        }
-        flippedCards = []
-
+      if (flippedCards.length === 2) {
+        checkMatch();
+      }
     }
-}
-function resetGame() {
-    window.location.reload()
-}
-}
+  }
 
+  // Function to check if two flipped cards match
+  function checkMatch() {
+    const [card1, card2] = flippedCards;
 
+    if (card1.dataset.value === card2.dataset.value) {
+      matchedPairs++;
+      if (matchedPairs === 18) {
+        alert('Congratulations! You have won the game!');
+        isGameOver = true;
+      }
+      flippedCards = [];
+    } else {
+      setTimeout(() => {
+        card1.classList.remove('flipped');
+        card2.classList.remove('flipped');
+        flippedCards = [];
+      }, 1000);
+    }
+  }
+
+  // Add event listeners to all cards
+  cards.forEach(card => {
+    card.addEventListener('click', () => flipCard(card));
+  });
+
+  // Handle game reset
+  document.getElementById('resetButton').addEventListener('click', () => {
+    if (isGameOver) {
+      location.reload(); // Reload the page to reset the game state
+    } else {
+      alert('Game is not over yet!');
+    }
+  });
+});

@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Guessing Game</title>
-    <link rel="stylesheet" href="../public/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Guessing Game</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <%- include('partials/header') %>
-
-    <div id="game-board">
-        <div id="card-grid">
-            <% cards.forEach((card, index) => { %>
-                <div class="card" id="card-<%= index %>" data-card-id="<%= card.id %>" onclick="flipCard('<%= index %>')">
-                    <div class="card-front">?</div>
-                    <div class="card-back"><%= card.value %></div>
-                </div>
-            <% }); %>
+  <div class="game-container">
+    <h1>Card Guessing Game</h1>
+    <div class="grid">
+      <% cards.forEach((card, index) => { %>
+        <div class="card" data-id="<%= index %>" data-value="<%= card %>">
+          <div class="card-inner">
+            <div class="card-front"></div>
+            <div class="card-back"><%= card %></div>
+          </div>
         </div>
-        <button id="reset-button" onclick="resetGame()">Reset Game</button>
+      <% }); %>
     </div>
+    <button id="resetButton">Reset Game</button>
+  </div>
 
-    <script src="/js/game.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>
